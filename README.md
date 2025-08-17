@@ -54,12 +54,6 @@ uvicorn api:app --reload
 - **POST /books**: `{ "isbn": "9780441172719" }` gibi bir body ile kitabı ekler.
 - **DELETE /books/{isbn}**: ISBN ile siler.
 
-## Seed (Örnek Veri Yükleme)
-PowerShell kullanıyorsanız:
-```powershell
-.\seed.ps1
-```
-
 ## Testler
 ```bash
 pytest -q

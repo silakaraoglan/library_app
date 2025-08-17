@@ -58,6 +58,7 @@ uvicorn api:app --reload
 PowerShell kullanıyorsanız:
 ```powershell
 .\seed.ps1
+```
 
 ## Testler
 ```bash

@@ -5,6 +5,7 @@ import os
 from typing import List
 
 from fastapi import FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware   # 👈 EKLENDİ
 from pydantic import BaseModel, Field
 
 from models import Library, Book
@@ -33,6 +34,14 @@ def create_app(db_path: str | None = None) -> FastAPI:
     Varsayılan: 'library.json'
     """
     app = FastAPI(title="Library API", version="1.0.0")
+
+    # 🌍 CORS Middleware — herkese açık
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],       # tüm domainlere izin ver
+        allow_methods=["*"],       # GET, POST, DELETE, vs.
+        allow_headers=["*"],       # tüm header'lara izin ver
+    )
 
     # Tek bir Library örneği: uygulama yaşamı boyunca paylaşılsın
     db_file = db_path or os.getenv("LIB_DB_PATH", "library.json")
@@ -64,8 +73,6 @@ def create_app(db_path: str | None = None) -> FastAPI:
 
         ok = app.state.lib.add_book(isbn)
         if not ok:
-            # add_book False döndüyse: ya bulunamadı ya da iç hata/bağlantı sorunu
-            # mevcut veri tabanında yoksa 404 dönmek mantıklı
             raise HTTPException(status_code=404, detail="ISBN bulunamadı veya dış servis hatası.")
 
         # yeni eklenen kitabı geri oku ve döndür

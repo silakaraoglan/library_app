@@ -28,7 +28,7 @@ def test_get_books_initially_empty(client):
 
 def test_post_books_success_with_isbn(client, monkeypatch):
     # httpx.get'i taklit ederek Open Library çağrılarını sahte yanıtla dolduruyoruz
-    def fake_get(url, timeout=10):
+    def fake_get(url, timeout=10, **kwargs):
         # /isbn/<isbn>.json
         if url.endswith("/isbn/9780441172719.json"):
             payload = {"title": "Dune", "authors": [{"key": "/authors/OL2162288A"}]}
@@ -61,7 +61,7 @@ def test_post_books_success_with_isbn(client, monkeypatch):
 
 
 def test_post_books_not_found_returns_404(client, monkeypatch):
-    def fake_get(url, timeout=10):
+    def fake_get(url, timeout=10, **kwargs):
         return httpx.Response(status_code=404, request=httpx.Request("GET", url))
 
     monkeypatch.setattr(httpx, "get", fake_get)
@@ -73,7 +73,7 @@ def test_post_books_not_found_returns_404(client, monkeypatch):
 
 def test_delete_books_flow(client, monkeypatch):
     # önce bir tane başarıyla ekleyelim
-    def fake_get(url, timeout=10):
+    def fake_get(url, timeout=10, **kwargs):
         if url.endswith("/isbn/9780132350884.json"):
             return _resp(200, {"title": "Clean Code", "authors": [{"key": "/authors/OL72011A"}]})
         if url.endswith("/authors/OL72011A.json"):

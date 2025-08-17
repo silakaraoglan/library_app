@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.env
+.venv
+*.sqlite3
+
+# Testing
+.htmlcov/
+.pytest_cache/
+
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/

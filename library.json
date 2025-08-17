@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Test Book",
+    "author": "Deneme Yazar",
+    "isbn": "1234567890",
+    "type": "Book"
+  },
+  {
+    "title": "Fantastic Mr. Fox",
+    "author": "Roald Dahl",
+    "isbn": "9780140328721",
+    "type": "Book"
+  }
+]

@@ -19,6 +19,7 @@ library_app/
     test_api.py
   requirements.txt
   README.md
+  seed.ps1 # PowerShell için örnek veri yükleyici
 ```
 
 ## Kurulum
@@ -52,6 +53,11 @@ uvicorn api:app --reload
 - **GET /books**: Tüm kitapları döndürür.
 - **POST /books**: `{ "isbn": "9780441172719" }` gibi bir body ile kitabı ekler.
 - **DELETE /books/{isbn}**: ISBN ile siler.
+
+## Seed (Örnek Veri Yükleme)
+PowerShell kullanıyorsanız:
+```powershell
+.\seed.ps1
 
 ## Testler
 ```bash
